@@ -5,10 +5,19 @@
 # Site
 title: 徐翔的博客
 subtitle: 漂亮做事 清楚行文
-description:
-author: 徐翔
-language:
+description: 只闻花香，不谈悲喜；喝茶读书，不争朝夕。
+author: Atlas
+language: zh-Hans
 timezone:
+
+# picture
+avatar: /images/avatar.jpg
+
+# 多说评论
+duoshuo_shortname: xuxiang
+
+# 百度统计
+baidu_analytics: 002275764b4b85b3fc6c30280c446d45
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -63,7 +72,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

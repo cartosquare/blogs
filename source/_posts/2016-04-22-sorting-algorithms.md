@@ -2,9 +2,13 @@
 layout: post
 title: "排序算法"
 date: 2016-04-22
+tags:
+  - 算法
 ---
 
 排序算法是计算机领域最经典也是研究最广泛的算法，并且是许多算法的基础。
+
+<!-- more -->
 
 ## 排序算法的应用领域
 
@@ -33,14 +37,14 @@ date: 2016-04-22
 
 排序方法 | 原地排序 | 稳定排序 | 最差 | 平均 | 最好 | 备注
 --- | --- | --- | --- | --- | --- | ---
-选择排序 | 是 | 否 | $$\begin{align} N^2/2 \end{align}$$ | $$\begin{align} N^2/2 \end{align}$$ | $$\begin{align} N^2/2 \end{align}$$ | 只需要N次交换   
-插入排序 | 是 | 是 | $$\begin{align} N^2/2 \end{align}$$ | $$\begin{align} N^2/4 \end{align}$$ |$$\begin{align}N \end{align}$$| 通常在N很小或是数据以及部分排序的时候使用
-shell排序 | 是 | 否 | 未知 | 未知 | $$\begin{align}N\end{align}$$ | 实现代码很少，通常用于嵌入式编程，时间复杂度未知但低于二次 |
-快速排序 | 是 | 否 | $$\begin{align} N^2/2 \end{align}$$ | $$\begin{align} 2N\lg(N) \end{align}$$| $$\begin{align}lg(N) \end{align}$$| 概率上保证 $$\begin{align} 2N\lg(N) \end{align}$$的时间复杂度，实际使用中最快的算法
-3路快速排序 | 是 | 否 | $$\begin{align} N^2/2 \end{align}$$ | $$\begin{align} 2N\lg(N) \end{align}$$|$$\begin{align}N \end{align}$$| 提升快速排序在大量重复记录情况下的效率
-归并排序 | 否 | 是 | $$\begin{align} N\lg(N) \end{align}$$ | $$\begin{align} N\lg(N) \end{align}$$ | $$\begin{align} N\lg(N) \end{align}$$ | 严格保证了$$\begin{align} N\lg(N) \end{align}$$的时间复杂度，并且是稳定的
-堆排序 | 是 | 否 | $$\begin{align} 2N\lg(N) \end{align}$$ | $$\begin{align} 2N\lg(N) \end{align}$$ | $$\begin{align} N\lg(N) \end{align}$$ | 严格保证了$$\begin{align} N\lg(N) \end{align}$$的时间复杂度，并且原地排序的（节省空间）
-？？？ | 是 | 是 | $$\begin{align} N\lg(N) \end{align}$$ | $$\begin{align} N\lg(N) \end{align}$$ | $$\begin{align} N\lg(N) \end{align}$$ | 终极排序算法:)
+选择排序 | 是 | 否 | N^2/2 | N^2/2 | N^2/2 | 只需要N次交换
+插入排序 | 是 | 是 | N^2/2 | N^2/4 | N | 通常在N很小或是数据以及部分排序的时候使用
+shell排序 | 是 | 否 | 未知 | 未知 | N | 实现代码很少，通常用于嵌入式编程，时间复杂度未知但低于二次 |
+快速排序 | 是 | 否 | N^2/2 | 2N\lg(N) | lg(N) | 概率上保证 2N\lg(N) 的时间复杂度，实际使用中最快的算法
+3路快速排序 | 是 | 否 | N^2/2 | 2N\lg(N) | N | 提升快速排序在大量重复记录情况下的效率
+归并排序 | 否 | 是 | N\lg(N) | N\lg(N) | N\lg(N) | 严格保证了lg(N)的时间复杂度，并且是稳定的
+堆排序 | 是 | 否 | 2N\lg(N) | 2N\lg(N) | N\lg(N) | 严格保证了lg(N) 的时间复杂度，并且原地排序的（节省空间）
+？？？ | 是 | 是 | N\lg(N) | N\lg(N) | N\lg(N) | 终极排序算法:)
 
 
 ## 选择排序
@@ -59,13 +63,13 @@ template<typename T>
 void selection_sort(std::vector<T>& a, int lo, int hi) {
     for (int i = lo; i <= hi; ++i) {
         int min_index = i;
-            
+
         for (int j = i + 1; j <= hi; ++j) {
             if (a[min_index] > a[j]) {
                 min_index = j;
             }
         }
-            
+
         // swap a[i] and a[min_index]
         exch(a[i], a[min_index]);
     }
@@ -122,13 +126,13 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
     template<typename T>
     void shell_sort(std::vector<T>& a, int lo, int hi) {
         int N = hi - lo + 1;
-        
+
         // decide decrease sequence
         int h = 1;
         while (h < N / 3) {
             h = 3 * h + 1;
         }
-        
+
         while (h >= 1) {
             // h-sort the array
             for (int i = h + lo; i <= hi; ++i) {
@@ -143,13 +147,13 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
 
 ## 堆排序
 
-堆排序体现了好的数据结构对算法的帮助。堆排序和选择排序的原理一致，都是从剩下的记录中不断选择最小的记录出来。但是选择排序需要线性的时间去查找最小记录。而从一个集合中选择最小的记录出来是一个经典的优先队列解决的问题，如果使用堆或者平衡二叉树来实现优先队列的话，就能让这个操作变成log(N)时间。从而，借助更好的优先队列实现，堆排序把选择排序从$$\begin{align}O(n^2)\end{align}$$复杂度提升到了$$\begin{align}O(n\log(n))\end{align}$$
+堆排序体现了好的数据结构对算法的帮助。堆排序和选择排序的原理一致，都是从剩下的记录中不断选择最小的记录出来。但是选择排序需要线性的时间去查找最小记录。而从一个集合中选择最小的记录出来是一个经典的优先队列解决的问题，如果使用堆或者平衡二叉树来实现优先队列的话，就能让这个操作变成log(N)时间。从而，借助更好的优先队列实现，堆排序把选择排序从O(n^2)复杂度提升到了O(n\log(n))
 
 ## 堆
 
 堆是实现优先队列插入和获取最小值操作的简单而高效的数据结构。他通过维持记录部分排序而非完全排序来工作，因此会比较高效。一个堆实际上可以用一个二叉树来表示（注意不是二叉搜索树！）。在一个最小堆中，一个节点的键值总是比它的子节点要小；在一个最大堆中，一个节点的键值总是比它的子节点要大。
 
-堆使用数组来实现，不需要使用任何的指针！键值在堆中的位置充当了指针的作用。在这个数组中，我们把二叉树的根节点存储在数组的第一个位置（为了方便，数组索引从1开始），相应地把它的左右两个子节点放在第二和第三的位置。一般地，我们可以把完全二叉数第l层的$$\begin{align}2^l\end{align}$$个键值从左到右放在$$\begin{align}2^{l-1}\end{align}$$和$$\begin{align}2^l - 1\end{align}$$之间。并且节点之间有以下关系：
+堆使用数组来实现，不需要使用任何的指针！键值在堆中的位置充当了指针的作用。在这个数组中，我们把二叉树的根节点存储在数组的第一个位置（为了方便，数组索引从1开始），相应地把它的左右两个子节点放在第二和第三的位置。一般地，我们可以把完全二叉数第l层的2^l个键值从左到右放在2^{l-1}和2^l - 1之间。并且节点之间有以下关系：
 
 * 位于位置k的结点的父结点的位置是 k / 2
 * 位于位置k的结点的子节点的位置是 2k 和 2k + 1
@@ -163,14 +167,14 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
             while (k > 1 && pq_[k / 2] > pq_[k]) {
                 // if children's node is larger than parent, exchange
                 exch(pq_[k], pq_[k / 2]);
-                
+
                 // swim up a level
                 k /= 2;
             }
         }
 ```
 
-对于一个有n个记录的堆来说，一次上浮最多只需要$$\begin{align}\lg(n)\end{align}$$次操作，因此，构造堆的时间复杂度为$$\begin{align}O(n\log(n))\end{align}$$复杂度
+对于一个有n个记录的堆来说，一次上浮最多只需要lg(n)次操作，因此，构造堆的时间复杂度为O(n\log(n))复杂度
 
 ## 如何从堆中取得最小值
 从最小堆中取得最小的记录只需取数组的第一个元素即可，但是取完后二叉树会出现一个洞，需要把数组最后的一个记录填补到已经移除的第一个记录上；把最后一个记录移上来后可能会破坏堆的性质，如最小堆中根结点的记录可能会大于子结点，如果出现这种情况，需要将根结点和其较大的子结点交换，这称为一次下沉。下面是最小堆的下沉代码：
@@ -185,32 +189,32 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
                     // now, j is the bigger children
                     j++;
                 }
-                
+
                 if (pq_[k] > pq_[j]) {
                     break;
                 }
-                
+
                 // if parent node is smaller than the bigger children, exchange
                 exch(pq_[k], pq_[j]);
-                
+
                 // sink down a level
                 k = j;
             }
-            
+
         }
 ```
 
-对于一个有n个记录的堆来说，一次下沉最多只需要$$\begin{align}\lg(n)\end{align}$$次操作，因此，取得最小值的操作的时间复杂度为$$\begin{align}O(\log(n))\end{align}$$
+对于一个有n个记录的堆来说，一次下沉最多只需要lg(n)次操作，因此，取得最小值的操作的时间复杂度为O(\log(n))
 
 ## 更快的构建堆的方法
 
-一条一条地插入记录来构造堆的方法需要$$\begin{align}O(n\log(n))\end{align}$$的时间复杂度，如果记录序列全部已知，我们可以采用一种自底向上的构造方法，基本思路是从底端不是叶子结点的记录开始，做下沉操作，这样只需处理n/2个结点，这个时间复杂度基本上是线性的。下面是最大堆的下沉操作和构造方式：
+一条一条地插入记录来构造堆的方法需要O(n\log(n))的时间复杂度，如果记录序列全部已知，我们可以采用一种自底向上的构造方法，基本思路是从底端不是叶子结点的记录开始，做下沉操作，这样只需处理n/2个结点，这个时间复杂度基本上是线性的。下面是最大堆的下沉操作和构造方式：
 
 ```
   template<typename T>
     void sink(std::vector<T>& a, int k, int N) {
         // NOTE: the value of node k is a[k - 1]
-        
+
         // make sure k is not the bottom level
         while (2 * k < N) {
             // j is the left children
@@ -219,14 +223,14 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
                 // now, j is the bigger children
                 j++;
             }
-            
+
             if (a[k - 1] > a[j - 1]) {
                 break;
             }
-            
+
             // if parent node is smaller than the bigger children, exchange
             exch(a[k - 1], a[j - 1]);
-            
+
             // sink down a level
             k = j;
         }
@@ -240,17 +244,17 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
 
 堆排序实现(这里用到了上面的最大堆的下沉方法)
 
-``` 
+```
     template<typename T>
     void heap_sort(std::vector<T>& pq) {
         int N = pq.size();
-        
+
         // Heap construction
         for (int k = N / 2; k >= 1; --k) {
             // loop for every non leaf node
             sink(pq, k, N);
         }
-        
+
         // Sort down
         while(N > 1) {
             exch(pq[0], pq[N - 1]);
@@ -261,7 +265,7 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
 
 基本特点
 
-* 最坏的情况下也能达到$$\begin{align}O(n\log(n))\end{align}$$，这是排序算法的理论最优。
+* 最坏的情况下也能达到O(n\log(n))，这是排序算法的理论最优。
 * 缺点在于内部循环较长，无法使用缓存，并且是不稳定的，在实际中并不是最快的
 
 ## 归并排序
@@ -277,7 +281,7 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
         for (int i = lo; i <= hi; ++i) {
             aux[i] = a[i];
         }
-        
+
         int m = lo;
         int n = mid + 1;
         for (int i = lo; i <= hi; ++i) {
@@ -292,7 +296,7 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
             }
         }
     }
-    
+
     // resuive sort
     const int CUTOFF = 7;
     template<typename T>
@@ -310,12 +314,12 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
         int mid = lo + (hi - lo) / 2;
         merge_sort(a, aux, lo, mid);
         merge_sort(a, aux, mid + 1, hi);
-        
+
         // do not merge if already sorted
         if (a[mid] < a[mid + 1]) {
             return;
         }
-        
+
         merge(a, aux, lo, mid, hi);
     }
 ```
@@ -324,7 +328,7 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
 
 基本特点
 
-* 归并排序的平均时间复杂度为$$\begin{align}O(n\log(n))\end{align}$$
+* 归并排序的平均时间复杂度为O(n\log(n))
 * 归并排序不是原地排序，需要额外的存储空间
 
 
@@ -355,7 +359,7 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
 
 快速排序和归并排序类似，都是递归的算法，通过把问题分解为子问题来解决。不同的是，归并排序每次都把问题分成相同大小的两个子问题，然后通过归并操作进行合并；而快速排序则通过拆分的方式来分解问题，即每次找一个中间元素，把记录分成小于该中间元素（在中间元素左边）和大于该中间元素（在中间元素右边）的这两部分，此时中间元素已经排好序，只需对左右两边递归继续采用相同方式拆分即可。
 
-和归并排序的归并操作是线性的时间复杂度类似，快速排序的拆分操作也是线性的。归并排序和快速排序的递归分解都把问题变成了一个二叉树的结构，而归并排序的二叉树是完全二叉树，因此树高是$$\begin{align}lg(n)\end{align}$$，而快速排序的树高则与中间元素的选取有很大的关系，为了达到了归并排序相似的树高，要求输入记录必须是无序的，研究表明，无序的二叉树插入的树高平均只比完全二叉树高36%，因此该种情况下的快速排序和归并排序的时间复杂度是相同的。当然由于快速排序加入了随机的因素，我们只能说平均情况下快速排序和归并排序的时间复杂度是相同的，也不排除很小的概率的情况下快速排序的时间复杂度为$$\begin{align}n^2\end{align}$$
+和归并排序的归并操作是线性的时间复杂度类似，快速排序的拆分操作也是线性的。归并排序和快速排序的递归分解都把问题变成了一个二叉树的结构，而归并排序的二叉树是完全二叉树，因此树高是lg(n)，而快速排序的树高则与中间元素的选取有很大的关系，为了达到了归并排序相似的树高，要求输入记录必须是无序的，研究表明，无序的二叉树插入的树高平均只比完全二叉树高36%，因此该种情况下的快速排序和归并排序的时间复杂度是相同的。当然由于快速排序加入了随机的因素，我们只能说平均情况下快速排序和归并排序的时间复杂度是相同的，也不排除很小的概率的情况下快速排序的时间复杂度为n^2
 
 基本思想
 
@@ -373,7 +377,7 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
     int partition(std::vector<T>& a, int lo, int hi) {
         int i = lo;
         int j = hi + 1;
-        
+
         while(true) {
             // process i pointer
             // find item on left to swap
@@ -382,7 +386,7 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
                     break;
                 }
             }
-            
+
             // process j pointer
             // find item on right to swap
             while(a[--j] > a[lo]) {
@@ -390,24 +394,24 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
                     break;
                 }
             }
-            
+
             // find if pointers cross
             if (i >= j) {
                 break;
             }
-            
+
             // swap
             exch(a[i], a[j]);
         }
-        
+
         // swap with partition item
         exch(a[lo], a[j]);
-        
+
         // return index of item now known to be in place
         return j;
     }
-    
-    
+
+
     template<typename T>
     void quick_sort_sub(std::vector<T>& a, int lo, int hi) {
         if (hi <= lo + CUTOFF) {
@@ -415,21 +419,21 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
             insertion_sort(a, lo, hi);
             return;
         }
-        
+
         // improvement 2: estimate partition item with median of three samples
         int m = median_of_three(a, lo, lo + (hi - lo)/ 2, hi);
         exch(a[lo], a[m]);
-        
+
         int j = partition(a, lo, hi);
         quick_sort_sub(a, lo, j - 1);
         quick_sort_sub(a, j + 1, hi);
     }
-    
+
     template<typename T>
     void quick_sort(std::vector<T>& a) {
         // shuffle is needed for performance guarantee
         shuffle(a);
-        
+
         quick_sort_sub<T>(a, 0, static_cast<int>(a.size()) - 1);
     }
 ```
@@ -438,9 +442,9 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
 
 基本特点
 
-虽然快速排序理论上只能在概率上趋近于$$\begin{align}nlg(n)\end{align}$$的时间复杂度，但是由于它的内层循环较小，并且容易利用计算机缓存等原因，一个设计得很好的快速排序的效率是归并排序和堆排序的2-3倍！
+虽然快速排序理论上只能在概率上趋近于nlg(n)的时间复杂度，但是由于它的内层循环较小，并且容易利用计算机缓存等原因，一个设计得很好的快速排序的效率是归并排序和堆排序的2-3倍！
 
-在实际应用中，如果记录有许多重复的话，会发现快速排序接近于$$\begin{align}n^2\end{align}$$的时间复杂度，这时候我们需要使用快速排序的改进版：3路快速排序
+在实际应用中，如果记录有许多重复的话，会发现快速排序接近于n^2的时间复杂度，这时候我们需要使用快速排序的改进版：3路快速排序
 
 ## 3路快速排序
 
@@ -466,18 +470,18 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
             insertion_sort(a, lo, hi);
             return;
         }
-        
+
         int lt = lo;
         int i = lo;
         int gt = hi;
-        
+
         // improvement 2: estimate partition item with median of three samples
         int m = median_of_three(a, lo, lo + (hi - lo)/ 2, hi);
         exch(a[lo], a[m]);
-        
+
         // partition item
         T v = a[lo];
-        
+
         while(i <= gt) {
             if (a[i] < v) {
                 exch(a[lt++], a[i++]);
@@ -487,18 +491,18 @@ shell 排序是插入排序的增强版：插入排序在往左比较大小时�
                 i++;
             }
         }
-        
+
         quick_sort_3way_sub(a, lo, lt - 1);
         quick_sort_3way_sub(a, gt + 1, hi);
     }
-    
+
     template<typename T>
     void quick_sort_3way(std::vector<T>& a) {
         // shuffle is needed for performance guarantee
         shuffle(a);
-        
+
         quick_sort_3way_sub<T>(a, 0, static_cast<int>(a.size()) - 1);
     }
 ```
 
-至此，经典的排序方法已经介绍完毕。除了选择排序和插入排序需要二次的时间复杂度外，堆排序、归并排序以及快速排序都能达到$$\begin{align}nlg(n)\end{align}$$的时间复杂度，而这也是证明了的排序算法时间复杂度的下界，即这已经是最优算法了。但是从之前的讨论可以看到，在实际情况中，受到各种因素的限制，时间复杂度相同的算法的实际效率并不同，并且有可能相差数倍，当然，这是大O方式来衡量时间复杂度的一个弊端：即它只能忽略影响算法效率的其它因素，单单从输入规模上来看算法运行时间随输入规模的变化。从这个角度来看，虽然堆排序、归并排序以及快速排序都是最优算法，但是还可能有更快的排序算法等待着我们去发掘。
+至此，经典的排序方法已经介绍完毕。除了选择排序和插入排序需要二次的时间复杂度外，堆排序、归并排序以及快速排序都能达到nlg(n)的时间复杂度，而这也是证明了的排序算法时间复杂度的下界，即这已经是最优算法了。但是从之前的讨论可以看到，在实际情况中，受到各种因素的限制，时间复杂度相同的算法的实际效率并不同，并且有可能相差数倍，当然，这是大O方式来衡量时间复杂度的一个弊端：即它只能忽略影响算法效率的其它因素，单单从输入规模上来看算法运行时间随输入规模的变化。从这个角度来看，虽然堆排序、归并排序以及快速排序都是最优算法，但是还可能有更快的排序算法等待着我们去发掘。

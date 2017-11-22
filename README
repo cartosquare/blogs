@@ -1,0 +1,31 @@
+# My Personal Blogs
+
+* 新建页面
+```
+hexo new page page-name
+```
+
+* 新建博客
+```
+hexo new post title
+```
+
+* 清除缓存
+```
+hexo clean
+```
+
+* 部署前生成页面
+```
+hexo generate
+```
+
+* 部署
+```
+hexo deploy
+```
+
+* 本地启动服务
+```
+hexo server
+```

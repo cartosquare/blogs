@@ -232,7 +232,7 @@ auto_excerpt:
 wechat_subscriber:
   enabled: true
   qcode: /images/wechat-qrcode.jpg
-  description: 欢迎添加微信交流
+  description: 
 
 
 

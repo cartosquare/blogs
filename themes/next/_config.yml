@@ -6,12 +6,12 @@
 favicon: /favicon.ico
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "DeepLearning,Algorithms,mapping,math"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss: 
+rss: false 
 
 #reward_comment: 如果觉得文章有用，请小额捐赠¥3
 #alipay: /images/alipay.jpg
@@ -244,7 +244,7 @@ wechat_subscriber:
 # MathJax Support
 mathjax:
   enable: true
-  cdn: //cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+  cdn: //cdn.staticfile.org/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
 
 # Swiftype Search API Key
@@ -257,7 +257,7 @@ mathjax:
 #duoshuo_shortname:
 
 # Disqus
-#disqus_shortname:
+#disqus_shortname: 
 
 # Hypercomments
 #hypercomments_id:
@@ -266,11 +266,13 @@ mathjax:
 # Available value:
 #    button | slide
 # Warning: Baidu Share does not support https.
-#baidushare:
+#baidushare: true
 ##  type: button
 
+livere_uid: MTAyMC8zMTk5NC84NTU4
+
 # Share
-#jiathis:
+jiathis: true
 # Warning: JiaThis does not support https.
 #add_this_id:
 
@@ -292,30 +294,30 @@ mathjax:
 # Make duoshuo show UA
 # user_id must NOT be null when admin_enable is true!
 # you can visit http://dev.duoshuo.com get duoshuo user id.
-duoshuo_info:
-  ua_enable: true
-  admin_enable: true
-  user_id: 6322756439613900000
-  admin_nickname: 博主
+#duoshuo_info:
+#  ua_enable: false
+#  admin_enable: false
+#  user_id: 6322756439613900000
+#  admin_nickname: 博主
 
 
 # Facebook SDK Support.
 # https://github.com/iissnan/hexo-theme-next/pull/410
-facebook_sdk:
-  enable: false
-  app_id:       #<app_id>
-  fb_admin:     #<user_id>
-  like_button:  #true
-  webmaster:    #true
+#facebook_sdk:
+#  enable: true
+#  app_id:       1537670719649729
+#  fb_admin:     Atlas Xu
+#  like_button:  true
+#  webmaster:    true
 
 # Facebook comments plugin
 # This plugin depends on Facebook SDK.
 # If facebook_sdk.enable is false, Facebook comments plugin is unavailable.
-facebook_comments_plugin:
-  enable: false
-  num_of_posts: 10  # min posts num is 1
-  width: 100%       # default width is 550px
-  scheme: light     # default scheme is light (light or dark)
+#facebook_comments_plugin:
+#  enable: true
+#  num_of_posts: 10  # min posts num is 1
+#  width: 100%       # default width is 550px
+#  scheme: light     # default scheme is light (light or dark)
 
 
 # Show number of visitors to each article.
@@ -378,7 +380,9 @@ algolia_search:
     hits_empty: "We didn't find any results for the search: ${query}"
     hits_stats: "${hits} results found in ${time} ms"
 
-
+# Local search
+local_search:
+  enable: true
 
 #! ---------------------------------------------------------------
 #! DO NOT EDIT THE FOLLOWING SETTINGS

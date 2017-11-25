@@ -14,14 +14,14 @@ timezone:
 avatar: /images/avatar.jpg
 
 # 多说评论
-duoshuo_shortname: xuxiang
+#duoshuo_shortname: xuxiang
 
 # 百度统计
-baidu_analytics: 45f95bde75317a93118efe0cfdfa761d
+baidu_analytics: 77db66ebf2c10ada47470339e4743a11
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://cartosquare.github.io
+url: http://www.cartosquare.com/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -80,11 +80,17 @@ deploy:
   type: git
   repo: https://github.com/cartosquare/cartosquare.github.io.git
 
-feed:
-  type: atom
-  path: atom.xml
-  limit: 20
-  hub:
-  content:
-  content_limit: 140
-  content_limit_delim: ' '
+#feed:
+#  type: atom
+#  path: atom.xml
+#  limit: 20
+#  hub:
+#  content:
+#  content_limit: 140
+#  content_limit_delim: ' '
+
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000

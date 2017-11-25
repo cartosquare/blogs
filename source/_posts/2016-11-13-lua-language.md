@@ -11,7 +11,6 @@ tags:
 
 [Lua](http://www.lua.org/) 是一门动态类型的脚本语言，具有很强的拓展性，可以和C/C++进行交互。Lua的语法简单、运行十分高效，通常应用于嵌入式程序、C程序，当然也可以单独使用Lua进行程序设计。
 
-![html](/images/blogs/lua-language/logo.png)
 <!-- more -->
 
 ## 安装 Lua

@@ -79,3 +79,12 @@ theme: next
 deploy:
   type: git
   repo: https://github.com/cartosquare/cartosquare.github.io.git
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '

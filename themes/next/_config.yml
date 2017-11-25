@@ -11,7 +11,7 @@ keywords: "Hexo, NexT"
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss: false
+rss: 
 
 #reward_comment: 如果觉得文章有用，请小额捐赠¥3
 #alipay: /images/alipay.jpg
@@ -232,7 +232,7 @@ auto_excerpt:
 wechat_subscriber:
   enabled: true
   qcode: /images/wechat-qrcode.jpg
-  description: 
+  description: 欢迎添加微信交流 
 
 
 

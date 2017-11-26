@@ -1,5 +1,5 @@
 ---
-title: 深度学习之一：Kick Off
+title: 机器学习有哪些组成部分
 date: 2017-11-23 22:00:10
 categories:
   - 算法

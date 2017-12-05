@@ -445,7 +445,7 @@ $$
 \\alpha,  & if\, x \lt 0 \\\\
 1, & if\, x \ge 0
 \\end{cases}
-$
+$$
 实现代码：
 ```c++
 template <>

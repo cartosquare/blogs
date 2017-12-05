@@ -169,7 +169,7 @@ bool SVMLossL1GradientOp<float, CPUContext>::RunOnDevice() {
 #### SoftMax Loss的梯度
 SoftMax函数的形式如下：
 $$S = \frac{e^{y\_i}}{\sum\_j{e^{y\_j}}} \qquad (11)$$
-根据导出的除法法则，有：
+根据导数的除法法则，有：
 $$
 \\begin{align}
 \frac{dS}{d{y\_i}} & =  \frac{e^{y\_i} \cdot \sum\_j{e^{y\_j}} - e^{y\_i} \cdot e^{y\_i}}{(\sum\_j{e^{y\_j}})^2} \\\\

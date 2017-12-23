@@ -29,8 +29,7 @@ class FCModel : public ModelUtil {
       : ModelUtil(initnet, predictnet) {}
 
   OperatorDef *AddFcOps(const std::string &input, const std::string &output,
-                        int in_size, int out_size, bool relu = false,
-                        float dropout = 0.5) {
+                        int in_size, int out_size, bool relu = false) {
     init.AddXavierFillOp({out_size, in_size}, output + "_w");
     predict.AddInput(output + "_w");
     init.AddConstantFillOp({out_size}, output + "_b");

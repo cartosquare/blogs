@@ -1,10 +1,14 @@
 ---
-title: convolutional-networks
+title: 卷积神经网络
 date: 2017-12-26 12:02:08
 tags:
+  - 卷积神经网络
+  - 卷积层
+  - 池化层
 ---
 
-卷积神经网络的核心是卷积层和池化层。另外还有一些正则化层，比如BatchNormalization和LocalConstrastNormalization层。
+深度学习目前在各个领域，尤其是图像和语音领域上，表现远超传统方法，靠的是卷积神经网络这个特殊的神经网络，卷积神经网络和普通神经网络的区别主要在于其深度以及特殊的层上，而其核心的层则是卷积层和池化层。
+<!-- more -->
 
 ## 卷积层
 
@@ -30,19 +34,21 @@ tags:
 
 对于输入数据体NCHW，输出数据体的维度计算如下：
 $$
-N^' = N
-C^' = K
-H^' = (H - F + 2 \times P) / S + 1
-W^' = (W - F + 2 \times P) / S + 1
+\\begin{align}
+& N^{'} = N \\\\
+& C^{'} = K \\\\
+& H^{'} = (H - F + 2 \times P) / S + 1 \\\\
+& W^{'} = (W - F + 2 \times P) / S + 1 \\\\
+\\end{align}
 $$
 
 ### 卷积层的前向计算
 
-假设 batch size 为1，首先我们知道卷积层的权重矩阵是$kernal_size \times Number\_of\_kernels$,其中$Number\_of\_kernels = K$，$kernal\_size = C \times F \times F$。这个矩阵的每一列都是一个kernal。
+假设 batch size 为1，首先我们知道卷积层的权重矩阵是$\text {kernal_size} \times \text {number\_of\_kernels}$,其中$\text {number\_of\_kernels} = K$，$\text {kernal\_size} = C \times F \times F$。这个矩阵的每一列都是一个kernal。
 
-这个权重矩阵里的每一列需要和输入图像的每一个小区域相乘，获得输出特征的每一个神经元，因此，需要把输入图像的每一个小区域（3维数据体）拉伸成一行，所有的这些行就可以组成一个大矩阵，然后用权重和这个大矩阵相乘就可以得出最后的输出，这个大矩阵的维度是 $number\_of\_patchs \times kernal\_size$，其中$number\_of\_patchs = H^' \times W^'$，即小区域的总个数是输出图像包含的神经元总数。
+这个权重矩阵里的每一列需要和输入图像的每一个小区域相乘，获得输出特征的每一个神经元，因此，需要把输入图像的每一个小区域（3维数据体）拉伸成一行，所有的这些行就可以组成一个大矩阵，然后用权重和这个大矩阵相乘就可以得出最后的输出，这个大矩阵的维度是 $\text {number\_of\_patchs} \times \text {kernal\_size}$，其中$\text {number\_of\_patchs} = H^{'} \times W^{'}$，即小区域的总个数是输出图像包含的神经元总数。
 
-因此，这两个矩阵相乘可以得到一个$number\_of\_patchs \times Number\_of\_kernels$的矩阵，这个矩阵的每一列然后再加上一个大小为K的偏置就是最后的输出。
+因此，这两个矩阵相乘可以得到一个$\text {number\_of\_patchs} \times \text {number\_of\_kernels}$的矩阵，这个矩阵的每一列然后再加上一个大小为K的偏置就是最后的输出。
 对于batch size 大于1的情况，只需要循环进行上述操作即可，batch中的每一个图像的计算是独立的。
 
 在caffe2中的实现的函数如下：
@@ -167,8 +173,8 @@ MaxPooling？谁起的名字？功能就是从一个池子里选出最大的那�
 
 ## LeNet
 
-LeNet是最早成功的卷积神经网络，用来识别手写字体和数字等，下面是这个网络的架构：
+LeNet是最早成功的卷积神经网络，用来识别手写字体和数字等，下面是这个网络的架构(红色椭圆是输入和输出的数据，蓝色矩形是功能层，或者叫对数据的操作子)：
 
 ![html](/images/blogs/cnn/lenet.png)
 
-LeNet一共有8层，由两个 CNN-MaxPooling 结构　＋　FC-ReLU-FC + SoftMax分类层组成。
+LeNet一共有8层，由两个卷积层加上两个直连层组成，其中每个卷积层之后都会跟一个MaxPooling池化层，第一个直连层后经过了ReLU激活层，第二个直连层的输出则直接输入到SoftMax层，最后得出网络的输出。
